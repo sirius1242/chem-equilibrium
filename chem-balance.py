@@ -28,7 +28,35 @@ for i in range(len(pro_comp)):
         pro_comp[i] = n.sub('', pro_comp[i])
     else:
         pro_coeff.append(1)
-print(rea_coeff)
-print(rea_comp)
-print(pro_coeff)
-print(pro_comp)
+init_dat = {}
+data = input("please enter the data in the begining of reaction (for example: 'H2S: 1.5; H2SO4: 1', if no data input we will view it as 0 \n")
+init_data = re.split('\ ?;\ ?', data)
+if init_data == []:
+    print('Error: please enter the initial data!')
+    exit()
+for i in init_data:
+    comp, dat = re.split('\ ?:\ ?', i)
+    init_dat[comp] = float(dat)
+x = Symbol('x')
+rea_int = []
+pro_int = []
+for i in rea_comp:
+    if i in init_dat:
+        rea_int.append(init_dat[i])
+    else:
+        rea_int.append(0)
+for i in pro_comp:
+    if i in init_dat:
+        pro_int.append(init_dat[i])
+    else:
+        pro_int.append(0)
+reaction = []
+product = []
+for i in range(len(rea_int)):
+    reaction.append('('+str(rea_coeff[i])+'*x-'+str(rea_int[i])+')**'+str(rea_coeff[i]))
+for i in range(len(pro_int)):
+    product.append('('+str(pro_coeff[i])+'*x+'+str(pro_int[i])+')**'+str(pro_coeff[i]))
+x_val = solve(eval('('+'*'.join(reaction)+')/('+'*'.join(product)+')-K'), x)
+for i in x_val:
+    if 'I' not in str(i):
+        print("the delta of "+rea_comp[0]+" is: "+str(-rea_coeff[0]*i))

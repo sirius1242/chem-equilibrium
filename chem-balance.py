@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from sympy import Symbol, solve
 import re
 balance={

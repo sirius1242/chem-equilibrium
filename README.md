@@ -11,16 +11,18 @@ python chem-balance.py
 ```
 when prompt shown, enter the data it requires:
 ### example
+
 please enter the chemical equation
 
-1 Fe3C + 22 HNO3 = 3 Fe(NO3)3 + 1 CO2 + 13 NO2 + 11 H2O
-
-please enter the equilibrium constant:
-
-12.33
+CO2+H2=CO+H2O
 
 please enter the data in the begining of reaction (for example: 'H2S: 1.5; H2SO4: 1', if no data input we will view it as 0 
 
-Fe3C: 1; HNO3: 0.5
+CO2:0.5; H2:0.7
 
-the delta of Fe3C  is: -1.64012823127958
+the delta of CO2 is: 3.26776695296637 (fake root)
+
+the delta of CO2 is: -0.267766952966369
+
+##### Found a online equilibrium calculator
+[http://navier.engr.colostate.edu/~dandy/code/code-4/](http://navier.engr.colostate.edu/~dandy/code/code-2/)

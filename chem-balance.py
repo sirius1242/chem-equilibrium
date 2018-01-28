@@ -15,6 +15,8 @@ else:
 rea, pro = equation.split('=')
 rea_comp = rea.split('+')
 pro_comp = pro.split('+')
+rea_dim = len(rea_comp)
+pro_dim = len(pro_comp)
 rea_coeff = []
 pro_coeff = []
 for i in range(len(rea_comp)):
@@ -58,6 +60,21 @@ for i in range(len(rea_int)):
 for i in range(len(pro_int)):
     product.append('('+str(pro_coeff[i])+'*x+'+str(pro_int[i])+')**'+str(pro_coeff[i]))
 x_val = solve(eval('('+'*'.join(reaction)+')/('+'*'.join(product)+')-K'), x)
+fin_dat = ['0']*(rea_dim + pro_dim)
 for i in x_val:
     if 'I' not in str(i):
-        print("the delta of "+rea_comp[0]+" is: "+str(-rea_coeff[0]*i))
+        #print("the delta of "+rea_comp[0]+" is: "+str(-rea_coeff[0]*i))
+        for j in range(rea_dim):
+            if rea_coeff[j] * -i + rea_int[j] < 0:
+                break
+            fin_dat[j] = rea_coeff[j] * -i + rea_int[j]
+        if j < rea_dim - 1:
+            continue
+        for j in range(pro_dim):
+            if pro_coeff[j] * i + pro_int[j] < 0:
+                break
+            fin_dat[j+rea_dim] = pro_coeff[j] * i + pro_int[j]
+        if j < pro_dim - 1:
+            continue
+        for j in range(rea_dim + pro_dim):
+            print((rea_comp + pro_comp)[j] + " : " + str(fin_dat[j]) + " ;")

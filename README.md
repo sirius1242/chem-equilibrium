@@ -20,9 +20,13 @@ please enter the data in the begining of reaction (for example: 'H2S: 1.5; H2SO4
 
 CO2:0.5; H2:0.7
 
-the delta of CO2 is: 3.26776695296637 (fake root)
+CO2 : 0.232233047033631 ;
 
-the delta of CO2 is: -0.267766952966369
+H2 : 0.432233047033631 ;
+
+CO : 0.267766952966369 ;
+
+H2O : 0.267766952966369 ;
 
 ##### Found a online equilibrium calculator
 [http://navier.engr.colostate.edu/~dandy/code/code-4/](http://navier.engr.colostate.edu/~dandy/code/code-2/)

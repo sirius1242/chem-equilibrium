@@ -59,7 +59,7 @@ for i in range(len(rea_int)):
     reaction.append('('+str(rea_coeff[i])+'*x-'+str(rea_int[i])+')**'+str(rea_coeff[i]))
 for i in range(len(pro_int)):
     product.append('('+str(pro_coeff[i])+'*x+'+str(pro_int[i])+')**'+str(pro_coeff[i]))
-x_val = solve(eval('('+'*'.join(reaction)+')/('+'*'.join(product)+')-K'), x)
+x_val = solve(eval('('+'*'.join(product)+')/('+'*'.join(reaction)+')-K'), x)
 fin_dat = ['0']*(rea_dim + pro_dim)
 for i in x_val:
     if 'I' not in str(i):

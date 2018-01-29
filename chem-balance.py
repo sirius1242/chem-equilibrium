@@ -1,17 +1,25 @@
 #!/usr/bin/env python3
 from sympy import Symbol, solve
+from tkinter import simpledialog, Label
+import tkinter as tk
 import re
+win = tk.Tk()
+res = Label(win)
+result = ''
 balance={
         'CO2+H2=CO+H2O': 1.4,
         'CO+H2O=CO2+H2': 23.2,
         'N2+3H2=2NH3': 152
         }
 n = re.compile(r'^\ ?\d+\ ?')
-equation = input("please enter the chemical equation\n")
+#equation = input("please enter the chemical equation\n")
+win.withdraw()
+equation = simpledialog.askstring("Input", "please enter the chemical equation:", parent=win)
 if equation in balance:
     K = balance[equation]
 else:
-    K = float(input('please enter the equilibrium constant:\n'))
+    #K = float(input('please enter the equilibrium constant:\n'))
+    K = simpledialog.askfloat("input", 'please enter the equilibrium constant:', parent=win)
 rea, pro = equation.split('=')
 rea_comp = rea.split('+')
 pro_comp = pro.split('+')
@@ -32,10 +40,11 @@ for i in range(len(pro_comp)):
     else:
         pro_coeff.append(1)
 init_dat = {}
-data = input("please enter the data in the begining of reaction (for example: 'H2S: 1.5; H2SO4: 1', if no data input we will view it as 0 \n")
+#data = input("please enter the data in the begining of reaction (for example: 'H2S: 1.5; H2SO4: 1', if no data input we will view it as 0 \n")
+data = simpledialog.askstring("Input", "please enter the data in the begining of reaction (for example: 'H2S: 1.5; H2SO4: 1', if no data input we will view it as 0", parent=win)
 init_data = re.split('\ ?;\ ?', data)
 if init_data == []:
-    print('Error: please enter the initial data!')
+    res.configure(text = 'Error: please enter the initial data!')
     exit()
 for i in init_data:
     comp, dat = re.split('\ ?:\ ?', i)
@@ -77,4 +86,8 @@ for i in x_val:
         if j < pro_dim - 1:
             continue
         for j in range(rea_dim + pro_dim):
-            print((rea_comp + pro_comp)[j] + " : " + str(fin_dat[j]) + " ;")
+            result += ((rea_comp + pro_comp)[j] + " : " + str(fin_dat[j]) + " ;\n")
+        res.configure(text = result)
+res.pack()
+win.deiconify()
+win.mainloop()
